@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="StowThatWindow">
+    <head>
+	<title>Stow that Window</title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body ng-controller="WindowController">
+	<md-content>
+	    <section layout="row">
+		<div flex>
+		    <md-button ng-click="stowCurrentWindow()">Stow this window</md-button>
+		</div>
+	    </section>
+	    <section layout="row">
+		<div flex>
+		    <md-list flex> 
+			<md-subheader class="md-no-sticky">My Windows</md-subheader>
+			<md-list-item ng-repeat="window in windows track by window.id">
+				<img ng-repeat="tab in window.tabs track by tab.id" src="{{tab.favIconUrl}}">
+				<md-button class="md-secondary" ng-click="restoreWindow($index)">
+					<md-icon>launch</md-icon>
+				</md-button>
+				<md-button class="md-secondary" ng-click="removeWindow($index)">
+					<md-icon>clear</md-icon>
+				</md-button>
+			</md-list-item>
+		    </md-list>
+		</div>
+	    </section>
+	</md-content>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+	<script src="popup.js"></script>
+	<script src="background.js"></script>
+    </body>
+</html>
