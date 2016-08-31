@@ -16,13 +16,16 @@ var unstowWindow = function(index, callback) {
     var window = stowedWindows[index];
     var createData = {
         focused: window.focused,
-        width: window.width,
-        height: window.height,
-        left: window.left,
-        top: window.top,
         state: window.state,
         type: window.type
     };
+
+    if (window.state !== 'maximized') {
+        createData.width = window.width;
+        createData.height = window.height;
+        createData.left = window.left;
+        createData.top = window.top;
+    }
 
     var len = window.tabs.length;
     if (len === 1) {
