@@ -1,13 +1,13 @@
 <!doctype html>
 <html ng-app="StowThatWindow">
-    <head>
+	<head>
 		<title>Stow that Window</title>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    </head>
+	</head>
 
-    <!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
-    <body ng-controller="WindowController">
+	<!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
+	<body ng-controller="WindowController">
 		<div flex layout="row">
 			<md-button ng-click="openWindows(5)">open windows</md-button>
 			<md-button ng-click="updateConfig()">update config</md-button>
@@ -80,5 +80,5 @@
 
 		<script src="popup.js"></script>
 		<script src="background.js"></script>
-    </body>
+	</body>
 </html>

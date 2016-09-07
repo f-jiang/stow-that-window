@@ -1,57 +1,57 @@
 var stowedWindows = [];
 
 var stowWindow = function(id, callback) {
-    chrome.windows.get(id, {populate: true}, function(window) {
-		// BUG popup view won't update when array updated
-        stowedWindows = stowedWindows.concat(window);
+  chrome.windows.get(id, {populate: true}, function(window) {
+    // BUG popup view won't update when array updated
+    stowedWindows = stowedWindows.concat(window);
 
-		if (!callback) {
-			chrome.windows.remove(id);
-		} else {
-			chrome.windows.remove(id, callback);
-		}
-    });
+    if (!callback) {
+      chrome.windows.remove(id);
+    } else {
+      chrome.windows.remove(id, callback);
+    }
+  });
 };
 
 var unstowWindow = function(index, callback) {
-    chrome.storage.sync.get('remember', function(items) {
-        var window = stowedWindows[index];
-        var createData = {
-            focused: window.focused,
-            type: window.type
-        };
+  chrome.storage.sync.get('remember', function(items) {
+    var window = stowedWindows[index];
+    var createData = {
+      focused: window.focused,
+      type: window.type
+    };
 
-        if (items.remember) {
-            if (window.state !== 'maximized') {
-                createData.width = window.width;
-                createData.height = window.height;
-                createData.left = window.left;
-                createData.top = window.top;
-            }
-        } else {
-            createData.state = 'maximized';
-        }
+    if (items.remember) {
+      if (window.state !== 'maximized') {
+        createData.width = window.width;
+        createData.height = window.height;
+        createData.left = window.left;
+        createData.top = window.top;
+      }
+    } else {
+      createData.state = 'maximized';
+    }
 
-        var len = window.tabs.length;
-        if (len === 1) {
-            createData.url = window.tabs[0].url;
-        } else {
-            createData.url = [];
-            for (i = 0; i < len; i++) {
-                createData.url.push(window.tabs[i].url);
-            }
-        }
+    var len = window.tabs.length;
+    if (len === 1) {
+      createData.url = window.tabs[0].url;
+    } else {
+      createData.url = [];
+      for (i = 0; i < len; i++) {
+        createData.url.push(window.tabs[i].url);
+      }
+    }
 
-        removeWindow(index);
+    removeWindow(index);
 
-        if (!callback) {
-            chrome.windows.create(createData);
-        } else {
-            chrome.windows.create(createData, callback);
-        }
-    });
+    if (!callback) {
+      chrome.windows.create(createData);
+    } else {
+      chrome.windows.create(createData, callback);
+    }
+  });
 };
 
 var removeWindow = function(index) {
-    stowedWindows.splice(index, 1);
+  stowedWindows.splice(index, 1);
 };

@@ -1,23 +1,23 @@
 {
-    "manifest_version":2,
-    "name":"Stow that Window",
-    "description":"Chrome extension that saves inactive windows for later use",
-    "version":"1.0",
-    "browser_action":{
-        "default_icon":"icon.png",
-        "default_popup":"popup.html"
-    },
-    "background": {
-        "scripts": ["background.js"]
-    },
-    "options_ui": {
-        "page": "options.html",
-        "chrome_style": true
-    },
-    "permissions":[
-        "tabs",
-        "background",
-        "storage"
-    ],
-    "content_security_policy": "script-src 'self' https://ajax.googleapis.com/; object-src 'self'"
+  "manifest_version": 2,
+  "name": "Stow that Window",
+  "description": "Chrome extension that saves inactive windows for later use",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/; object-src 'self'"
 }
