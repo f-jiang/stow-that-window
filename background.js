@@ -2,7 +2,8 @@ var stowedWindows = [];
 
 var stowWindow = function(id, callback) {
     chrome.windows.get(id, {populate: true}, function(window) {
-		stowedWindows.push(window);
+		// BUG popup view won't update when array updated
+        stowedWindows = stowedWindows.concat(window);
 
 		if (!callback) {
 			chrome.windows.remove(id);
@@ -13,37 +14,42 @@ var stowWindow = function(id, callback) {
 };
 
 var unstowWindow = function(index, callback) {
-    var window = stowedWindows[index];
-    var createData = {
-        focused: window.focused,
-        state: window.state,
-        type: window.type
-    };
+    chrome.storage.sync.get('remember', function(items) {
+        var window = stowedWindows[index];
+        var createData = {
+            focused: window.focused,
+            type: window.type
+        };
 
-    if (window.state !== 'maximized') {
-        createData.width = window.width;
-        createData.height = window.height;
-        createData.left = window.left;
-        createData.top = window.top;
-    }
-
-    var len = window.tabs.length;
-    if (len === 1) {
-        createData.url = window.tabs[0].url;
-    } else {
-        createData.url = [];
-        for (i = 0; i < len; i++) {
-            createData.url.push(window.tabs[i].url);
+        if (items.remember) {
+            if (window.state !== 'maximized') {
+                createData.width = window.width;
+                createData.height = window.height;
+                createData.left = window.left;
+                createData.top = window.top;
+            }
+        } else {
+            createData.state = 'maximized';
         }
-    }
 
-    removeWindow(index);
+        var len = window.tabs.length;
+        if (len === 1) {
+            createData.url = window.tabs[0].url;
+        } else {
+            createData.url = [];
+            for (i = 0; i < len; i++) {
+                createData.url.push(window.tabs[i].url);
+            }
+        }
 
-    if (!callback) {
-        chrome.windows.create(createData);
-    } else {
-        chrome.windows.create(createData, callback);
-    }
+        removeWindow(index);
+
+        if (!callback) {
+            chrome.windows.create(createData);
+        } else {
+            chrome.windows.create(createData, callback);
+        }
+    });
 };
 
 var removeWindow = function(index) {

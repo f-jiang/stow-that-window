@@ -8,11 +8,16 @@
         "default_popup":"popup.html"
     },
     "background": {
-	"scripts": ["background.js"]
+        "scripts": ["background.js"]
+    },
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
     },
     "permissions":[
         "tabs",
-        "background"
+        "background",
+        "storage"
     ],
     "content_security_policy": "script-src 'self' https://ajax.googleapis.com/; object-src 'self'"
 }

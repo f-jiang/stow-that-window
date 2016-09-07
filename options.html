@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            #footer { margin: 10px 15px; }
+            #footer * { display: inline-block }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <input id="auto-stow" type="checkbox">
+                        <label>Stow current window upon restoring a stowed window</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="remember" type="checkbox">
+                        <label>Remember stowed windows' sizes and positions</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="exclude-current" type="checkbox">
+                        <label>Stow all windows except the current one</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="footer">
+            <button id="save">Save</button>
+            <div id="status"></div>
+        </div>
+
+        <script src="options.js"></script>
+    </body>
+</html>
