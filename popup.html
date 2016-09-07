@@ -1,84 +1,84 @@
 <!doctype html>
 <html ng-app="StowThatWindow">
-	<head>
-		<title>Stow that Window</title>
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	</head>
+  <head>
+    <title>Stow that Window</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
 
-	<!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
-	<body ng-controller="WindowController">
-		<div flex layout="row">
-			<md-button ng-click="openWindows(5)">open windows</md-button>
-			<md-button ng-click="updateConfig()">update config</md-button>
-		</div>
+  <!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
+  <body ng-controller="WindowController">
+    <div flex layout="row">
+      <md-button ng-click="openWindows(5)">open windows</md-button>
+      <md-button ng-click="updateConfig()">update config</md-button>
+    </div>
 
-		<div flex layout="row">
-			auto stow: {{ autoStow }} <br>
-			remember: {{ remember }} <br>
-			excludeCurrent: {{ excludeCurrent }} <br>
-		</div>
+    <div flex layout="row">
+      auto stow: {{ autoStow }} <br>
+      remember: {{ remember }} <br>
+      excludeCurrent: {{ excludeCurrent }} <br>
+    </div>
 
-		<div flex layout="row" layout-align="center center">
-			<md-button class="md-raised md-primary" ng-click="stowCurrentWindow()">
-				<h3>Stow this window</h3>
-			</md-button>
-		</div>
+    <div flex layout="row" layout-align="center center">
+      <md-button class="md-raised md-primary" ng-click="stowCurrentWindow()">
+      <h3>Stow this window</h3>
+      </md-button>
+    </div>
 
-		<md-content>
-			<div layout="row" layout-align="center center">
-				<md-button class="md-icon-button" ng-click="stowAllWindows()">
-					<md-icon>input</md-icon>
-					<md-tooltip md-direction="top" md-delay="500">Stow all</md-tooltip>
-				</md-button>
-				<md-button class="md-icon-button" ng-click="restoreAllWindows()">
-					<md-icon>launch</md-icon>
-					<md-tooltip md-direction="top" md-delay="500">Restore all</md-tooltip>
-				</md-button>
-				<md-button class="md-icon-button" ng-click="removeAllWindows()">
-					<md-icon>clear</md-icon>
-					<md-tooltip md-direction="top" md-delay="500">Delete all</md-tooltip>
-				</md-button>
-				<md-button class="md-icon-button" ng-click="openOptions()">
-					<md-icon>settings</md-icon>
-					<md-tooltip md-direction="top" md-delay="500">Settings</md-tooltip>
-				</md-button>
-			</div>
-			<md-divider></md-divider>
-			<div flex>
-				<md-list flex>
-					<!--turn this into an accordion list of the tabs-->
-					<md-list-item ng-if="windows.length === 0">
-						<div class="md-list-item-text">
-							<p>No stowed windows</p>
-						</div>
-					</md-list-item>
-					<md-list-item ng-if="windows.length > 0" ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
-						<!--add spacing between icons, might also need to reconsider dimensions for other displays-->
-						<img ng-repeat="tab in window.tabs track by tab.id" src="{{tab.favIconUrl}}" width="24vh" height="24px">
+    <md-content>
+      <div layout="row" layout-align="center center">
+        <md-button class="md-icon-button" ng-click="stowAllWindows()">
+          <md-icon>input</md-icon>
+          <md-tooltip md-direction="top" md-delay="500">Stow all</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="restoreAllWindows()">
+          <md-icon>launch</md-icon>
+          <md-tooltip md-direction="top" md-delay="500">Restore all</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="removeAllWindows()">
+          <md-icon>clear</md-icon>
+          <md-tooltip md-direction="top" md-delay="500">Delete all</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="openOptions()">
+          <md-icon>settings</md-icon>
+          <md-tooltip md-direction="top" md-delay="500">Settings</md-tooltip>
+        </md-button>
+      </div>
+      <md-divider></md-divider>
+      <div flex>
+        <md-list flex>
+          <!--turn this into an accordion list of the tabs-->
+          <md-list-item ng-if="windows.length === 0">
+            <div class="md-list-item-text">
+              <p>No stowed windows</p>
+            </div>
+          </md-list-item>
+          <md-list-item ng-if="windows.length > 0" ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
+            <!--add spacing between icons, might also need to reconsider dimensions for other displays-->
+            <img ng-repeat="tab in window.tabs track by tab.id" src="{{tab.favIconUrl}}" width="24vh" height="24px">
 
-						<!--narrow the gap between these two buttons-->
-						<md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">
-							<md-icon>launch</md-icon>
-							<md-tooltip md-direction="top" md-delay="500">Restore window</md-tooltip>
-						</md-button>
-						<md-button class="md-secondary md-icon-button" ng-click="removeWindow($index)">
-							<md-icon>clear</md-icon>
-							<md-tooltip md-direction="top" md-delay="500">Remove window</md-tooltip>
-						</md-button>
-					</md-list-item>
-				</md-list>
-			</div>
-		</md-content>
+            <!--narrow the gap between these two buttons-->
+            <md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">
+            <md-icon>launch</md-icon>
+            <md-tooltip md-direction="top" md-delay="500">Restore window</md-tooltip>
+            </md-button>
+              <md-button class="md-secondary md-icon-button" ng-click="removeWindow($index)">
+              <md-icon>clear</md-icon>
+              <md-tooltip md-direction="top" md-delay="500">Remove window</md-tooltip>
+            </md-button>
+          </md-list-item>
+        </md-list>
+      </div>
+    </md-content>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-		<script src="popup.js"></script>
-		<script src="background.js"></script>
-	</body>
+    <script src="popup.js"></script>
+    <script src="background.js"></script>
+  </body>
 </html>
