@@ -1,0 +1,25 @@
+{
+  "name": "stow-that-window",
+  "homepage": "https://github.com/f-jiang/stow-that-window",
+  "authors": [
+    "Feilan Jiang <f-jiang@github.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-messages": "^1.5.8",
+    "angular-material": "^1.1.1",
+    "angular-aria": "1.5.8"
+  }
+}
