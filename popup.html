@@ -8,17 +8,6 @@
 
   <!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
   <body ng-controller="WindowController">
-    <div flex layout="row">
-      <md-button ng-click="openWindows(5)">open windows</md-button>
-      <md-button ng-click="updateConfig()">update config</md-button>
-    </div>
-
-    <div flex layout="row">
-      auto stow: {{ autoStow }} <br>
-      remember: {{ remember }} <br>
-      excludeCurrent: {{ excludeCurrent }} <br>
-    </div>
-
     <div flex layout="row" layout-align="center center">
       <md-button class="md-raised md-primary" ng-click="stowCurrentWindow()">
       <h3>Stow this window</h3>

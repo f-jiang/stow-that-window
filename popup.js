@@ -1,40 +1,7 @@
 var app = angular.module('StowThatWindow', ['ngMaterial']);
 var bg = chrome.extension.getBackgroundPage();
 
-// temp
-var sites = [
-  'https://www.google.ca/#gfe_rd=cr',
-  'http://www.canadacomputers.com/',
-  'https://www.youtube.com/',
-  'http://www.newegg.ca/',
-  'http://www.ncix.com/',
-  'https://www.nzxt.com/',
-  'http://www.razerzone.com/',
-  'https://steelseries.com/',
-  'https://mechanicalkeyboards.com/'
-];
-
 app.controller('WindowController', function($scope) {
-  // temp
-  $scope.openWindows = function(n) {
-    for (i = 0; i < n; i++) {
-      var urls = [];
-      for (j = 0; j < Math.round(Math.random() * sites.length); j++) {
-        urls.push(sites[j]);
-      }
-      chrome.windows.create({url: urls});
-    }
-  };
-
-  // temp
-  $scope.updateConfig = function() {
-    chrome.storage.sync.get(null, function(items) {
-      $scope.autoStow = items.autoStow;
-      $scope.remember = items.remember;
-      $scope.excludeCurrent = items.excludeCurrent;
-    });
-  };
-
   $scope.windows = bg.stowedWindows;
 
   $scope.stowCurrentWindow = function() {
@@ -69,9 +36,6 @@ app.controller('WindowController', function($scope) {
     chrome.windows.getAll({populate: false}, function(windows) {
       chrome.storage.sync.get('excludeCurrent', function(items) {
         for (i = 0; i < windows.length; i++) {
-          console.log('info:', windows[i].focused, windows[i].id);
-          console.log('windows', $scope.windows);
-
           if (items.excludeCurrent && windows[i].focused) {
             continue;
           }
