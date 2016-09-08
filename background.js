@@ -55,3 +55,11 @@ var unstowWindow = function(index, callback) {
 var removeWindow = function(index) {
   stowedWindows.splice(index, 1);
 };
+
+chrome.runtime.onInstalled.addListener(function(details) {
+  if (details.reason === 'install') {
+    $.getJSON('defaultOptions.json', function(data) {
+      chrome.storage.sync.set(data);
+    });
+  }
+});

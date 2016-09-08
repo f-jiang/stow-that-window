@@ -13,14 +13,12 @@ function saveOptions() {
 }
 
 function restoreOptions() {
-  chrome.storage.sync.get({
-    autoStow: false,
-    remember: true,
-    excludeCurrent: true
-  }, function(items) {
-    document.getElementById('auto-stow').checked = items.autoStow;
-    document.getElementById('remember').checked = items.remember;
-    document.getElementById('exclude-current').checked = items.excludeCurrent;
+  $.getJSON('defaultOptions.json', function(data) {
+    chrome.storage.sync.get(data, function(items) {
+      document.getElementById('auto-stow').checked = items.autoStow;
+      document.getElementById('remember').checked = items.remember;
+      document.getElementById('exclude-current').checked = items.excludeCurrent;
+    });
   });
 }
 
