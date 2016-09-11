@@ -36,6 +36,7 @@ app.controller('WindowController', function($scope) {
   };
 
   $scope.windows = bg.stowedWindows;
+  $scope.$watchCollection('windows', function() { });
 
   $scope.stowCurrentWindow = function() {
     chrome.windows.getCurrent({populate: false}, function(window) {
