@@ -26,15 +26,6 @@ app.controller('WindowController', function($scope) {
     }
   };
 
-  // temp
-  $scope.updateConfig = function() {
-    chrome.storage.sync.get(null, function(items) {
-      $scope.autoStow = items.autoStow;
-      $scope.remember = items.remember;
-      $scope.excludeCurrent = items.excludeCurrent;
-    });
-  };
-
   $scope.windows = bg.stowedWindows;
   $scope.$watchCollection('windows', function() { });
 
