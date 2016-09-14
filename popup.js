@@ -26,6 +26,13 @@ app.controller('WindowController', function($scope) {
     }
   };
 
+  // temp
+  document.onkeydown = function(e) {
+    if (e.keyCode === 16) {
+      $scope.openWindows(5);
+    }
+  };
+
   $scope.windows = bg.stowedWindows;
   $scope.$watchCollection('windows', function() { });
 
