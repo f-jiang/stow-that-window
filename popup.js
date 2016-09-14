@@ -1,4 +1,4 @@
-var app = angular.module('StowThatWindow', ['ngMaterial']);
+var app = angular.module('StowThatWindow', ['ngScrollbars', 'ngMaterial']);
 var bg = chrome.extension.getBackgroundPage();
 
 // temp
@@ -13,6 +13,18 @@ var sites = [
   'https://steelseries.com/',
   'https://mechanicalkeyboards.com/'
 ];
+
+app.config(function(ScrollBarsProvider) {
+  ScrollBarsProvider.defaults = {
+    setHeight: 100,
+    scrollInertia: 500,
+    axis: 'y',
+    advanced: {
+      updateOnContentResize: true
+    },
+    theme: 'minimal-dark'
+  };
+});
 
 app.controller('WindowController', function($scope) {
   // temp

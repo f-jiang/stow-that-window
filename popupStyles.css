@@ -1,0 +1,8 @@
+#container {
+    min-width: 20em;
+    max-width: 20em;
+    min-height: 25em;
+    max-height: 25em;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
