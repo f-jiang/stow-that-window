@@ -37,8 +37,8 @@
           </md-button>
         </div>
         <md-divider></md-divider>
-        <div flex layout="row">
-          <md-list flex ng-scrollbars>
+        <div id="scrollbar-container"flex layout="row" ng-scrollbars>
+          <md-list flex>
             <!--turn this into an accordion list of the tabs-->
             <md-list-item ng-if="windows.length === 0">
               <div class="md-list-item-text">

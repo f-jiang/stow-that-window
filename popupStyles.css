@@ -6,3 +6,9 @@
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
+#scrollbar-container {
+    overflow: hidden;
+    min-height: 15em;
+    max-height: 15em;
+}
