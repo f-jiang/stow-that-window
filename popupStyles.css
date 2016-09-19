@@ -13,6 +13,11 @@
     max-height: 15em;
 }
 
+md-list-item {
+    min-width: 20em;
+    max-width: 20em;
+}
+
 .tab-favicon {
     margin: 0.15em;
     width: 1.5em;
