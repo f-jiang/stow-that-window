@@ -48,7 +48,7 @@
           </md-list-item>
           <md-list-item ng-if="windows.length > 0" ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
             <!--add spacing between icons, might also need to reconsider dimensions for other displays-->
-            <img ng-repeat="tab in window.tabs track by tab.id" src="{{tab.favIconUrl}}" width="24vh" height="24px">
+            <img class="tab-favicon" ng-repeat="tab in window.tabs track by tab.id" src="{{tab.favIconUrl}}">
 
             <!--narrow the gap between these two buttons-->
             <md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">

@@ -12,3 +12,9 @@
     min-height: 15em;
     max-height: 15em;
 }
+
+.tab-favicon {
+    margin: 0.15em;
+    width: 1.5em;
+    height: 1.5em;
+}
