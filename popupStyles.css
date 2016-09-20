@@ -7,7 +7,7 @@
     overflow-y: hidden;
 }
 
-#scrollbar-container {
+#scrollbar-container, #empty-list-indicator {
     overflow: hidden;
     min-height: 15em;
     max-height: 15em;
