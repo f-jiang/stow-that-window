@@ -2,7 +2,6 @@ var stowedWindows = [];
 
 var stowWindow = function(id, callback) {
   chrome.windows.get(id, {populate: true}, function(window) {
-    // BUG popup view won't update when array updated
     stowedWindows.push(window);
 
     if (!callback) {

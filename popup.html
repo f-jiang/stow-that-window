@@ -2,19 +2,19 @@
 <html ng-app="StowThatWindow">
   <head>
     <title>Stow that Window</title>
+
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="popupStyles.css">
     <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <!--static dimensions, scroll if overfill and empty if underfilled; also resize if array updated-->
   <body ng-controller="WindowController">
     <div id="container">
       <div md-whiteframe="2">
         <div flex layout="row" layout-align="center center">
           <md-button class="md-raised md-primary" ng-click="stowCurrentWindow()">
-          <h3>Stow this window</h3>
+            <h3>Stow this window</h3>
           </md-button>
         </div>
 
@@ -41,19 +41,17 @@
       <div id="empty-list-indicator" flex layout="row" layout-align="center center" ng-if="windows.length === 0">
         <h3 class="md-body-1">No stowed windows</h3>
       </div>
-      <div id="scrollbar-container"flex layout="row" ng-scrollbars ng-if="windows.length > 0">
+      <div id="scrollbar-container" flex layout="row" ng-scrollbars ng-if="windows.length > 0">
         <md-list flex>
-          <!--turn this into an accordion list of the tabs-->>
+          <!--turn this into an accordion list of the tabs-->
           <md-list-item ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
-            <!--add spacing between icons, might also need to reconsider dimensions for other displays-->
             <img class="tab-favicon" ng-repeat="tab in window.tabs.slice(0, 4) track by tab.id" src="{{tab.favIconUrl}}">
 
-            <!--narrow the gap between these two buttons-->
             <md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">
-            <md-icon>launch</md-icon>
-            <md-tooltip md-direction="top" md-delay="500">Restore window</md-tooltip>
+              <md-icon>launch</md-icon>
+              <md-tooltip md-direction="top" md-delay="500">Restore window</md-tooltip>
             </md-button>
-              <md-button class="md-secondary md-icon-button" ng-click="removeWindow($index)">
+            <md-button class="md-secondary md-icon-button" ng-click="removeWindow($index)">
               <md-icon>clear</md-icon>
               <md-tooltip md-direction="top" md-delay="500">Remove window</md-tooltip>
             </md-button>
