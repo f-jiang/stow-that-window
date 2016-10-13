@@ -98,23 +98,9 @@ app.controller('WindowController', function($scope) {
   };
 
   $scope.restoreAllWindows = function() {
-    chrome.storage.sync.get('autoStow', function(items) {
-      if (items.autoStow) {
-        chrome.windows.getCurrent({populate: false}, function(window) {
-          for (i = 0, l = $scope.windows.length; i < l - 1; i++) {
-            bg.unstowWindow(0);
-          }
-
-          bg.unstowWindow(0, function() {
-            bg.stowWindow(window.id);
-          });
-        });
-      } else {
-        for (i = 0, l = $scope.windows.length; i < l; i++) {
-          bg.unstowWindow(0);
-        }
-      }
-    });
+    for (i = 0, l = $scope.windows.length; i < l; i++) {
+      bg.unstowWindow(0);
+    }
   };
 
   $scope.removeAllWindows = function() {
