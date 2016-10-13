@@ -16,7 +16,8 @@ var unstowWindow = function(index, callback) {
   var window = stowedWindows[index];
   var createData = {
     focused: window.focused,
-    type: window.type
+    type: window.type,
+    state: window.state
   };
 
   if (window.state !== 'maximized') {
