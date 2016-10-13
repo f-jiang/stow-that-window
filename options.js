@@ -1,7 +1,6 @@
 function saveOptions() {
   chrome.storage.sync.set({
     autoStow: document.getElementById('auto-stow').checked,
-    remember: document.getElementById('remember').checked,
     excludeCurrent: document.getElementById('exclude-current').checked
   }, function() {
     var status = document.getElementById('status');
@@ -16,7 +15,6 @@ function restoreOptions() {
   $.getJSON('defaultOptions.json', function(data) {
     chrome.storage.sync.get(data, function(items) {
       document.getElementById('auto-stow').checked = items.autoStow;
-      document.getElementById('remember').checked = items.remember;
       document.getElementById('exclude-current').checked = items.excludeCurrent;
     });
   });
