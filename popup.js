@@ -77,22 +77,24 @@ app.controller('WindowController', function($scope) {
   $scope.removeWindow = bg.removeWindow;
 
   $scope.stowAllWindows = function() {
-    chrome.windows.getAll({populate: false}, function(windows) {
-      chrome.storage.sync.get('excludeCurrent', function(items) {
-        for (i = 0; i < windows.length; i++) {
-          console.log('info:', windows[i].focused, windows[i].id);
-          console.log('windows', $scope.windows);
+    chrome.windows.getCurrent({populate: false}, function(window) {
+      chrome.windows.getAll({populate: false}, function(windows) {
+        chrome.storage.sync.get('excludeCurrent', function(items) {
+          for (i = 0; i < windows.length; i++) {
+            console.log('info:', windows[i].focused, windows[i].id);
+            console.log('windows', $scope.windows);
 
-          if (items.excludeCurrent && windows[i].focused) {
-            continue;
+            if (items.excludeCurrent && (windows[i].focused || windows[i].id === window.id)) {
+              continue;
+            }
+
+            bg.stowWindow(windows[i].id);
           }
 
-          bg.stowWindow(windows[i].id);
-        }
-
-        if (!items.excludeCurrent) {
-          chrome.windows.create({'state': 'maximized'});
-        }
+          if (!items.excludeCurrent) {
+            chrome.windows.create({'state': 'maximized'});
+          }
+        });
       });
     });
   };
