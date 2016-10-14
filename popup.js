@@ -53,7 +53,7 @@ app.controller('WindowController', function($scope) {
       bg.stowWindow(window.id, function() {
         chrome.windows.getAll({populate: false}, function(windows) {
           if (windows.length <= 1) {
-            chrome.windows.create();
+            chrome.windows.create({'state': 'maximized'});
           }
         });
       });
@@ -91,7 +91,7 @@ app.controller('WindowController', function($scope) {
         }
 
         if (!items.excludeCurrent) {
-          chrome.windows.create();
+          chrome.windows.create({'state': 'maximized'});
         }
       });
     });
