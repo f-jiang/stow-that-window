@@ -50,17 +50,19 @@ app.controller('WindowController', function($scope) {
 
   $scope.stowCurrentWindow = function() {
     chrome.windows.getCurrent({populate: false}, function(window) {
-      bg.stowWindow(window.id, function() {
-        chrome.windows.getAll({populate: false}, function(windows) {
-          if (windows.length <= 1) {
-            chrome.windows.create({'state': 'maximized'});
-          }
-        });
+      chrome.windows.getAll({populate: false}, function(windows) {
+        if (windows.length === 1) {
+          chrome.windows.create({'state': 'maximized'}, bg.stowWindow(window.id));
+        } else {
+          bg.stowWindow(window.id);
+        }
       });
     });
   };
 
   $scope.restoreWindow = function(index) {
+    // BUG on Windows, restoration of windows sometimes fails
+    // something is causing |chrome.windows.create()| in background.js to fail or corrupting |createData|
     chrome.storage.sync.get('autoStow', function(items) {
       if (items.autoStow) {
         chrome.windows.getCurrent({populate: false}, function(window) {
