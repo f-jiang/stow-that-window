@@ -1,19 +1,6 @@
 var app = angular.module('StowThatWindow', ['ngScrollbars', 'ngMaterial']);
 var bg = chrome.extension.getBackgroundPage();
 
-// temp
-var sites = [
-  'https://www.google.ca/#gfe_rd=cr',
-  'http://www.canadacomputers.com/',
-  'https://www.youtube.com/',
-  'http://www.newegg.ca/',
-  'http://www.ncix.com/',
-  'https://www.nzxt.com/',
-  'http://www.razerzone.com/',
-  'https://steelseries.com/',
-  'https://mechanicalkeyboards.com/'
-];
-
 app.config(function(ScrollBarsProvider) {
   ScrollBarsProvider.defaults = {
     setHeight: 100,
@@ -27,24 +14,6 @@ app.config(function(ScrollBarsProvider) {
 });
 
 app.controller('WindowController', function($scope) {
-  // temp
-  $scope.openWindows = function(n) {
-    for (i = 0; i < n; i++) {
-      var urls = [];
-      for (j = 0; j < Math.round(Math.random() * sites.length); j++) {
-        urls.push(sites[j]);
-      }
-      chrome.windows.create({url: urls});
-    }
-  };
-
-  // temp
-  document.onkeydown = function(e) {
-    if (e.keyCode === 16) {
-      $scope.openWindows(5);
-    }
-  };
-
   $scope.windows = bg.stowedWindows;
   $scope.$watchCollection('windows', function() { });
 
