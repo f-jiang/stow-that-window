@@ -83,9 +83,6 @@ app.controller('WindowController', function($scope) {
       chrome.windows.getAll({populate: false}, function(windows) {
         chrome.storage.sync.get('excludeCurrent', function(items) {
           for (i = 0; i < windows.length; i++) {
-            console.log('info:', windows[i].focused, windows[i].id);
-            console.log('windows', $scope.windows);
-
             if (items.excludeCurrent && (windows[i].focused || windows[i].id === window.id)) {
               continue;
             }
