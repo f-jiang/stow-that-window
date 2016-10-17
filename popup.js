@@ -61,8 +61,6 @@ app.controller('WindowController', function($scope) {
   };
 
   $scope.restoreWindow = function(index) {
-    // BUG on Windows, restoration of windows sometimes fails
-    // something is causing |chrome.windows.create()| in background.js to fail or corrupting |createData|
     chrome.storage.sync.get('autoStow', function(items) {
       if (items.autoStow) {
         chrome.windows.getCurrent({populate: false}, function(window) {

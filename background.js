@@ -15,7 +15,6 @@ var stowWindow = function(id, callback) {
 var unstowWindow = function(index, callback) {
   var window = stowedWindows[index];
   var createData = {
-    focused: window.focused,
     type: window.type,
     state: window.state
   };
