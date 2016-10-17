@@ -80,16 +80,20 @@ app.controller('WindowController', function($scope) {
     chrome.windows.getCurrent({populate: false}, function(window) {
       chrome.windows.getAll({populate: false}, function(windows) {
         chrome.storage.sync.get('excludeCurrent', function(items) {
-          for (i = 0; i < windows.length; i++) {
-            if (items.excludeCurrent && (windows[i].focused || windows[i].id === window.id)) {
-              continue;
+          if (windows.length > 1) {
+            for (i = 0; i < windows.length; i++) {
+              if (items.excludeCurrent && (windows[i].focused || windows[i].id === window.id)) {
+                continue;
+              }
+
+              bg.stowWindow(windows[i].id);
             }
 
-            bg.stowWindow(windows[i].id);
-          }
-
-          if (!items.excludeCurrent) {
-            chrome.windows.create({'state': 'maximized'});
+            if (!items.excludeCurrent) {
+              chrome.windows.create({'state': 'maximized'});
+            }
+          } else {
+            chrome.windows.create({'state': 'maximized'}, bg.stowWindow(window.id));
           }
         });
       });

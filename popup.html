@@ -23,11 +23,11 @@
             <md-icon>input</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Stow all</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button" ng-click="restoreAllWindows()">
+          <md-button class="md-icon-button" ng-click="restoreAllWindows()" ng-disabled="windows.length === 0">
             <md-icon>launch</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Restore all</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button" ng-click="removeAllWindows()">
+          <md-button class="md-icon-button" ng-click="removeAllWindows()" ng-disabled="windows.length === 0">
             <md-icon>clear</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Delete all</md-tooltip>
           </md-button>
