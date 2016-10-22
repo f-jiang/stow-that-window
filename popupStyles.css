@@ -23,3 +23,21 @@ md-list-item {
     width: 1.5em;
     height: 1.5em;
 }
+
+/* list item animations */
+.fade-animation.ng-enter, .fade-animation.ng-leave { 
+    -webkit-transition: 250ms ease-in-out all;
+    -moz-transition: 250ms ease-in-out all; 
+    -ms-transition: 250ms ease-in-out all;
+    -o-transition: 250ms ease-in-out all;
+    transition: 250ms ease-in-out all;
+} 
+ 
+.fade-animation.ng-enter.ng-enter-active, .fade-animation.ng-leave {
+    opacity: 1;
+}
+ 
+.fade-animation.ng-leave.ng-leave-active, .fade-animation.ng-enter {
+    opacity: 0;
+}
+

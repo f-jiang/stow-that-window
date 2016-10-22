@@ -38,13 +38,13 @@
         </div>
       </div>
 
-      <div id="empty-list-indicator" flex layout="row" layout-align="center center" ng-if="windows.length === 0">
+      <div id="empty-list-indicator" flex class="fade-animation" layout="row" layout-align="center center" ng-if="windows.length === 0">
         <h3 class="md-body-1">No stowed windows</h3>
       </div>
       <div id="scrollbar-container" flex layout="row" ng-scrollbars ng-if="windows.length > 0">
         <md-list flex>
           <!--turn this into an accordion list of the tabs-->
-          <md-list-item ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
+          <md-list-item class="fade-animation" ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
             <img class="tab-favicon" ng-repeat="tab in window.tabs.slice(0, 4) track by tab.id" src="{{tab.favIconUrl}}">
 
             <md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">
