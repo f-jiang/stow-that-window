@@ -13,11 +13,10 @@ app.config(function(ScrollBarsProvider) {
   };
 });
 
-app.controller('WindowController', function($scope) {
-  $scope.windows = bg.stowedWindows;
-  $scope.$watchCollection('windows', function() { });
+app.service('WindowManager', function() {
+  this.stowedWindows = bg.stowedWindows;
 
-  $scope.stowCurrentWindow = function() {
+  this.stowCurrentWindow = function() {
     chrome.windows.getCurrent({populate: false}, function(window) {
       chrome.windows.getAll({populate: false}, function(windows) {
         if (windows.length === 1) {
@@ -29,23 +28,7 @@ app.controller('WindowController', function($scope) {
     });
   };
 
-  $scope.restoreWindow = function(index) {
-    chrome.storage.sync.get('autoStow', function(items) {
-      if (items.autoStow) {
-        chrome.windows.getCurrent({populate: false}, function(window) {
-          bg.unstowWindow(index, function() {
-            bg.stowWindow(window.id);
-          });
-        });
-      } else {
-        bg.unstowWindow(index);
-      }
-    });
-  };
-
-  $scope.removeWindow = bg.removeWindow;
-
-  $scope.stowAllWindows = function() {
+  this.stowAllWindows = function() {
     chrome.windows.getCurrent({populate: false}, function(window) {
       chrome.windows.getAll({populate: false}, function(windows) {
         chrome.storage.sync.get('excludeCurrent', function(items) {
@@ -69,19 +52,46 @@ app.controller('WindowController', function($scope) {
     });
   };
 
-  $scope.restoreAllWindows = function() {
-    for (i = 0, l = $scope.windows.length; i < l; i++) {
+  this.restoreWindow = function(index) {
+    chrome.storage.sync.get('autoStow', function(items) {
+      if (items.autoStow) {
+        chrome.windows.getCurrent({populate: false}, function(window) {
+          bg.unstowWindow(index, function() {
+            bg.stowWindow(window.id);
+          });
+        });
+      } else {
+        bg.unstowWindow(index);
+      }
+    });
+  };
+
+  this.restoreAllWindows = function() {
+    for (i = 0, l = this.stowedWindows.length; i < l; i++) {
       bg.unstowWindow(0);
     }
   };
 
-  $scope.removeAllWindows = function() {
-    for (i = 0, l = $scope.windows.length; i < l; i++) {
+  this.removeWindow = function(index) {
+    bg.removeWindow(index);
+  };
+
+  this.removeAllWindows = function() {
+    for (i = 0, l = this.stowedWindows.length; i < l; i++) {
       bg.removeWindow(0);
     }
   };
+});
 
-  $scope.openOptions = function() {
-    chrome.runtime.openOptionsPage();
-  };
+app.controller('WindowController', function($scope, WindowManager) {
+  $scope.stowedWindows = WindowManager.stowedWindows;
+  $scope.$watchCollection('stowedWindows', function() { });
+
+  $scope.stowCurrentWindow = WindowManager.stowCurrentWindow;
+  $scope.restoreWindow = WindowManager.restoreWindow;
+  $scope.removeWindow = WindowManager.removeWindow;
+  $scope.stowAllWindows = WindowManager.stowAllWindows;
+  $scope.restoreAllWindows = WindowManager.restoreAllWindows;
+  $scope.removeAllWindows = WindowManager.removeAllWindows;
+  $scope.openOptions = chrome.runtime.openOptionsPage;
 });
