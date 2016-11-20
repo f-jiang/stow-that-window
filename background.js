@@ -1,3 +1,5 @@
+'use strict';
+
 var stowedWindows = [];
 
 var stowWindow = function(id, callback) {

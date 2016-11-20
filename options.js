@@ -1,3 +1,5 @@
+'use strict';
+
 function saveOptions() {
   chrome.storage.sync.set({
     autoStow: document.getElementById('auto-stow').checked,

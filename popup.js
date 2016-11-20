@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('StowThatWindow', ['ngScrollbars', 'ngMaterial', 'ngAnimate']);
 var bg = chrome.extension.getBackgroundPage();
 
