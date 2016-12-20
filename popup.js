@@ -57,7 +57,7 @@ app.service('WindowManager', function($q) {
         chrome.windows.create({'state': 'maximized'}, bg.stowWindow(current.id));
       } else if (window === self.allActiveWindows) {
         chrome.storage.sync.get('excludeCurrent', function(items) {
-          for (i = 0; i < all.length; i++) {
+          for (var i = 0; i < all.length; i++) {
             if (!items.excludeCurrent || (!all[i].focused && all[i].id !== current.id)) {
               bg.stowWindow(all[i].id);
             }
@@ -70,7 +70,7 @@ app.service('WindowManager', function($q) {
       } else if (window === self.currentActiveWindow) {
         bg.stowWindow(current.id);
       } else if (window.length) {
-        for (i = 0; i < window.length; i++) {
+        for (var i = 0; i < window.length; i++) {
           bg.stowWindow(window[i].id);
         }
       } else {
@@ -84,7 +84,7 @@ app.service('WindowManager', function($q) {
 
     // if window is an array
     if (window.length) {
-      for (i = 0, j = window.length; i < j; i++) {
+      for (var i = 0, j = window.length; i < j; i++) {
         index = self.findStowedWindowIndex(window[0]);
 
         if (index !== -1) {
@@ -114,7 +114,7 @@ app.service('WindowManager', function($q) {
 
     // if window is an array
     if (window.length) {
-      for (i = 0, j = window.length; i < j; i++) {
+      for (var i = 0, j = window.length; i < j; i++) {
         index = self.findStowedWindowIndex(window[0]);
 
         if (index !== -1) {

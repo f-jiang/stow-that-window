@@ -33,7 +33,7 @@ var unstowWindow = function(index, callback) {
     createData.url = window.tabs[0].url;
   } else {
     createData.url = [];
-    for (i = 0; i < len; i++) {
+    for (var i = 0; i < len; i++) {
       createData.url.push(window.tabs[i].url);
     }
   }
