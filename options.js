@@ -1,6 +1,17 @@
 'use strict';
 
-function saveOptions() {
+// restore options
+document.addEventListener('DOMContentLoaded', function() {
+  $.getJSON('defaultOptions.json', function(data) {
+    chrome.storage.sync.get(data, function(items) {
+      document.getElementById('auto-stow').checked = items.autoStow;
+      document.getElementById('exclude-current').checked = items.excludeCurrent;
+    });
+  });
+});
+
+// save options
+document.getElementById('save').addEventListener('click', function() {
   chrome.storage.sync.set({
     autoStow: document.getElementById('auto-stow').checked,
     excludeCurrent: document.getElementById('exclude-current').checked
@@ -11,16 +22,4 @@ function saveOptions() {
       status.textContent = '';
     }, 750);
   });
-}
-
-function restoreOptions() {
-  $.getJSON('defaultOptions.json', function(data) {
-    chrome.storage.sync.get(data, function(items) {
-      document.getElementById('auto-stow').checked = items.autoStow;
-      document.getElementById('exclude-current').checked = items.excludeCurrent;
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('save').addEventListener('click', saveOptions);
+});

@@ -23,11 +23,11 @@
             <md-icon>input</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Stow all</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button" ng-click="restoreAllWindows()" ng-disabled="windows.length === 0">
+          <md-button class="md-icon-button" ng-click="restoreAllWindows()" ng-disabled="stowedWindows.length === 0">
             <md-icon>launch</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Restore all</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button" ng-click="removeAllWindows()" ng-disabled="windows.length === 0">
+          <md-button class="md-icon-button" ng-click="removeAllWindows()" ng-disabled="stowedWindows.length === 0">
             <md-icon>clear</md-icon>
             <md-tooltip md-direction="top" md-delay="500">Delete all</md-tooltip>
           </md-button>
@@ -38,13 +38,13 @@
         </div>
       </div>
 
-      <div id="empty-list-indicator" flex class="fade-animation" layout="row" layout-align="center center" ng-if="windows.length === 0">
+      <div id="empty-list-indicator" flex class="fade-animation" layout="row" layout-align="center center" ng-if="stowedWindows.length === 0">
         <h3 class="md-body-1">No stowed windows</h3>
       </div>
-      <div id="scrollbar-container" flex layout="row" ng-scrollbars ng-if="windows.length > 0">
+      <div id="scrollbar-container" flex layout="row" ng-scrollbars ng-if="stowedWindows.length > 0">
         <md-list flex>
           <!--turn this into an accordion list of the tabs-->
-          <md-list-item class="fade-animation" ng-repeat="window in windows track by window.id" ng-click="restoreWindow($index)">
+          <md-list-item class="fade-animation" ng-repeat="window in stowedWindows track by window.id" ng-click="restoreWindow($index)">
             <img class="tab-favicon" ng-repeat="tab in window.tabs.slice(0, 4) track by tab.id" src="{{tab.favIconUrl}}">
 
             <md-button class="md-secondary md-icon-button" ng-click="restoreWindow($index)">
