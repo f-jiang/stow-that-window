@@ -83,8 +83,7 @@
     self.restoreStowed = function(window) {
       var index;
 
-      // if window is an array
-      if (window.length) {
+      if (window.constructor === Array || window.length) {
         for (let i = 0, j = window.length; i < j; i++) {
           index = self.findStowedWindowIndex(window[0]);
 
@@ -113,8 +112,7 @@
     self.removeStowed = function(window) {
       var index;
 
-      // if window is an array
-      if (window.length) {
+      if (window.constructor === Array || window.length) {
         for (let i = 0, j = window.length; i < j; i++) {
           index = self.findStowedWindowIndex(window[0]);
 
