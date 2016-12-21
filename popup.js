@@ -96,9 +96,8 @@
           index = self.findStowedWindowIndex(window);
 
           if (items.autoStow) {
-            bg.unstowWindow(index, () => {
-              // BUG below code only runs in debug mode
-              self.currentActiveWindow().then((current) => {
+            self.currentActiveWindow().then((current) => {
+              bg.unstowWindow(index, () => {
                 bg.stowWindow(current.id);
               });
             });
