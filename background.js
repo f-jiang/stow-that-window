@@ -3,7 +3,7 @@
 var stowedWindows = [];
 
 var stowWindow = function(id, callback) {
-  chrome.windows.get(id, {populate: true}, function(window) {
+  chrome.windows.get(id, {populate: true}, (window) => {
     stowedWindows.push(window);
 
     if (!callback) {
@@ -33,7 +33,7 @@ var unstowWindow = function(index, callback) {
     createData.url = window.tabs[0].url;
   } else {
     createData.url = [];
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       createData.url.push(window.tabs[i].url);
     }
   }
@@ -51,9 +51,9 @@ var removeWindow = function(index) {
   stowedWindows.splice(index, 1);
 };
 
-chrome.runtime.onInstalled.addListener(function(details) {
+chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
-    $.getJSON('defaultOptions.json', function(data) {
+    $.getJSON('defaultOptions.json', (data) => {
       chrome.storage.sync.set(data);
     });
   }

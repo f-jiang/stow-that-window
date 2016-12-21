@@ -4,7 +4,7 @@
   var app = angular.module('StowThatWindow', ['ngScrollbars', 'ngMaterial', 'ngAnimate']);
   var bg = chrome.extension.getBackgroundPage();
 
-  app.config(function(ScrollBarsProvider) {
+  app.config((ScrollBarsProvider) => {
     ScrollBarsProvider.defaults = {
       setHeight: 100,
       scrollInertia: 500,
@@ -22,7 +22,7 @@
     self.stowedWindows = bg.stowedWindows;
 
     self.findStowedWindowIndex = function(window) {
-      return self.stowedWindows.findIndex(function(element) {
+      return self.stowedWindows.findIndex((element) => {
         return element.id === window.id;
       });
     };
@@ -30,7 +30,7 @@
     self.allActiveWindows = function() {
       var deferred = $q.defer();
 
-      chrome.windows.getAll({populate: false}, function(windows) {
+      chrome.windows.getAll({populate: false}, (windows) => {
         deferred.resolve(windows);
       });
 
@@ -40,7 +40,7 @@
     self.currentActiveWindow = function() {
       var deferred = $q.defer();
 
-      chrome.windows.getCurrent({populate: false}, function(window) {
+      chrome.windows.getCurrent({populate: false}, (window) => {
         deferred.resolve(window);
       });
 
@@ -50,15 +50,15 @@
     self.stowActive = function(window) {
       $q.all([
           self.allActiveWindows(), self.currentActiveWindow()
-      ]).then(function(results) {
-        var all = results[0];
-        var current = results[1];
+      ]).then((results) => {
+        let all = results[0];
+        let current = results[1];
 
         if (all.length === 1) {
           chrome.windows.create({'state': 'maximized'}, bg.stowWindow(current.id));
         } else if (window === self.allActiveWindows) {
-          chrome.storage.sync.get('excludeCurrent', function(items) {
-            for (var i = 0; i < all.length; i++) {
+          chrome.storage.sync.get('excludeCurrent', (items) => {
+            for (let i = 0; i < all.length; i++) {
               if (!items.excludeCurrent || (!all[i].focused && all[i].id !== current.id)) {
                 bg.stowWindow(all[i].id);
               }
@@ -71,7 +71,7 @@
         } else if (window === self.currentActiveWindow) {
           bg.stowWindow(current.id);
         } else if (window.length) {
-          for (var i = 0; i < window.length; i++) {
+          for (let i = 0; i < window.length; i++) {
             bg.stowWindow(window[i].id);
           }
         } else {
@@ -85,7 +85,7 @@
 
       // if window is an array
       if (window.length) {
-        for (var i = 0, j = window.length; i < j; i++) {
+        for (let i = 0, j = window.length; i < j; i++) {
           index = self.findStowedWindowIndex(window[0]);
 
           if (index !== -1) {
@@ -93,13 +93,13 @@
           }
         }
       } else {
-        chrome.storage.sync.get('autoStow', function(items) {
+        chrome.storage.sync.get('autoStow', (items) => {
           index = self.findStowedWindowIndex(window);
 
           if (items.autoStow) {
-            bg.unstowWindow(index, function() {
+            bg.unstowWindow(index, () => {
               // BUG below code only runs in debug mode
-              self.currentActiveWindow().then(function(current) {
+              self.currentActiveWindow().then((current) => {
                 bg.stowWindow(current.id);
               });
             });
@@ -115,7 +115,7 @@
 
       // if window is an array
       if (window.length) {
-        for (var i = 0, j = window.length; i < j; i++) {
+        for (let i = 0, j = window.length; i < j; i++) {
           index = self.findStowedWindowIndex(window[0]);
 
           if (index !== -1) {
@@ -131,7 +131,7 @@
 
   app.controller('WindowController', function($scope, WindowManager) {
     $scope.stowedWindows = WindowManager.stowedWindows;
-    $scope.$watchCollection('stowedWindows', function() { });
+    $scope.$watchCollection('stowedWindows', () => { });
 
     $scope.stowCurrentWindow = function() {
       WindowManager.stowActive(WindowManager.currentActiveWindow);
