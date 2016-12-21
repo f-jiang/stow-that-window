@@ -70,7 +70,7 @@
           });
         } else if (window === self.currentActiveWindow) {
           bg.stowWindow(current.id);
-        } else if (window.length) {
+        } else if (window.constructor === Array || window.length) {
           for (let i = 0; i < window.length; i++) {
             bg.stowWindow(window[i].id);
           }
