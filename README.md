@@ -24,6 +24,10 @@ This way, Stow that Window minimizes memory usage and allows for a smoother brow
 
 - Feilan Jiang ([f-jiang](https://github.com/f-jiang))
 
+## License
+
+This project is licensed under the Apache License - see the LICENSE.txt file for details.
+
 ## Acknowledgements
 
 Cascading windows icon made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com/)
