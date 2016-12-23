@@ -10,8 +10,8 @@ This way, Stow that Window minimizes memory usage and allows for a smoother brow
 
 ## Installation
 
-- Release version can be downloaded from the [Chrome Web Store](https://chrome.google.com/webstore/detail/stow-that-window/dcpbpjamlplnpdioahaeigfepibljaeb)
-- Development releases: `git clone` this repo or download as ZIP, then [load as an unpacked extension](https://developer.chrome.com/extensions/getstarted#unpacked) in Google Chrome
+- **Release version** can be downloaded from the [Chrome Web Store](https://chrome.google.com/webstore/detail/stow-that-window/dcpbpjamlplnpdioahaeigfepibljaeb)
+- **Development releases**: `git clone` this repo or download as ZIP, then [load as an unpacked extension](https://developer.chrome.com/extensions/getstarted#unpacked) in Google Chrome
 
 ## Built With
 
@@ -26,7 +26,7 @@ This way, Stow that Window minimizes memory usage and allows for a smoother brow
 
 ## License
 
-This project is licensed under the Apache License - see the LICENSE.txt file for details.
+This project is licensed under version 2.0 of the Apache License; see the [LICENSE.txt](https://github.com/f-jiang/stow-that-window/blob/master/LICENSE.txt) file for details.
 
 ## Acknowledgements
 
