@@ -10,8 +10,18 @@ This way, Stow that Window minimizes memory usage and allows for a smoother brow
 
 ## Installation
 
-- **Release version** can be downloaded from the [Chrome Web Store](https://chrome.google.com/webstore/detail/stow-that-window/dcpbpjamlplnpdioahaeigfepibljaeb)
-- **Development releases**: `git clone` this repo or download as ZIP, then [load as an unpacked extension](https://developer.chrome.com/extensions/getstarted#unpacked) in Google Chrome
+### Release Version
+
+Release versions can be downloaded from the [Chrome Web Store](https://chrome.google.com/webstore/detail/stow-that-window/dcpbpjamlplnpdioahaeigfepibljaeb).
+
+### Development Releases
+
+- `git clone` this repo or download as ZIP
+- To install dependencies, `cd` into the local repo and execute the following command:
+```
+bower install
+```
+- Finally, [load as an unpacked extension](https://developer.chrome.com/extensions/getstarted#unpacked) in Google Chrome
 
 ## Built With
 
